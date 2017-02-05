@@ -1,0 +1,15 @@
+---
+version: '2'
+services:
+  app:
+    image: phoenix:1.4.1
+    build: .
+    ports:
+      - "4001:4000"
+    volumes:
+      - ./src:/app
+    depends_on:
+      - db
+  db:
+    image: postgres:9
+
