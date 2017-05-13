@@ -2,7 +2,7 @@
 version: '2'
 services:
   app:
-    image: phoenix:1.3.0-rc0
+    image: phoenix:1.3.0-rc1
     build: .
     ports:
       - "4000:4000"

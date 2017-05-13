@@ -2,7 +2,7 @@ FROM elixir:1.4.2
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force  https://github.com/phoenixframework/archives/raw/master/1.3-rc/phx_new-1.3.0-rc.0.ez \
+ && mix archive.install --force  https://github.com/phoenixframework/archives/raw/master/1.3-rc/phx_new-1.3.0-rc.1.ez \
  && apt-get update \
  && curl -sL https://deb.nodesource.com/setup_6.x | bash \
  && apt-get install -y apt-utils \
