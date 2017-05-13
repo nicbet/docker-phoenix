@@ -1,10 +1,11 @@
-FROM elixir:1.4.1
+FROM elixir:1.4.2
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.2.1.ez \
+ && mix archive.install --force  https://github.com/phoenixframework/archives/raw/master/1.3-rc/phx_new-1.3.0-rc.0.ez \
  && apt-get update \
  && curl -sL https://deb.nodesource.com/setup_6.x | bash \
+ && apt-get install -y apt-utils \
  && apt-get install -y nodejs \
  && apt-get install -y build-essential \
  && apt-get install -y inotify-tools \
@@ -16,4 +17,4 @@ WORKDIR $APP_HOME
 
 EXPOSE 4000
 
-CMD ["mix", "phoenix.server"]
+CMD ["mix", "phx.server"]
