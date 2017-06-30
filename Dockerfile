@@ -1,8 +1,8 @@
-FROM elixir:1.4.1
+FROM elixir:1.4.5
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.2.1.ez \
+ && mix archive.install --force https://github.com/phoenixframework/archives/raw/master/phoenix_new-1.2.4.ez \
  && apt-get update \
  && curl -sL https://deb.nodesource.com/setup_6.x | bash \
  && apt-get install -y nodejs \
