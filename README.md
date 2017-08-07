@@ -20,7 +20,7 @@ It's so simple: just clone this repository.
 
 You can specify a particular Phoenix version by targeting the corresponding branch of this repository.
 
-For instance, for a dockerized development environment for Phoenix 1.2.1 you could run:
+For instance, for a dockerized development environment for Phoenix 1.3.0 you could run:
 ```
 git clone -b 1.3 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
@@ -36,47 +36,11 @@ Initialize a new phoenix application. The following command will create a new Ph
 ```
 ./mix phx.new . --app hello
 ```
-
-You will end up with the following directory structure:
-```
-src/
-├── README.md
-├── _build
-│   └── dev
-├── assets
-│   ├── brunch-config.js
-│   ├── css
-│   ├── js
-│   ├── node_modules
-│   ├── package.json
-│   ├── static
-│   └── vendor
-├── config
-│   ├── config.exs
-│   ├── dev.exs
-│   ├── prod.exs
-│   ├── prod.secret.exs
-│   └── test.exs
-├── deps
-├── lib
-│   └── hello
-├── mix.exs
-├── mix.lock
-├── priv
-│   ├── gettext
-│   ├── repo
-│   └── static
-└── test
-    ├── support
-    ├── test_helper.exs
-    └── web
-```
-
 Why does this work? The `docker-compose.yml` file specifies that your local `src/` directory is mapped inside the docker container as `/app`. And `/app` in the container is marked as the working directory for any command that is being executed, such as `mix phoenix.new`.
 
 **NOTE:** It is important to specify your app name through the `--app <name>` option, as Phoenix will otherwise name your app from the target directory passed in, which in our case is `.`
 **NOTE:** It is okay to answer `Y` when phoenix states that the `/app` directory already exists.
-**NOTE:** You will have to use the `phx.new` command instead of `phoenix.new` or `mix deps.get` will fail!
+**NOTE:** Starting from 1.3.0 the `mix phoenix.new` command has been deprecated. You will have to use the `phx.new` command instead of `phoenix.new` or `mix deps.get` will fail!
 
 ### Alternative: Existing Application
 Copy your existing code Phoenix application code to the `src/` directory in the cloned repository.
