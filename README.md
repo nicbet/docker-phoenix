@@ -82,7 +82,7 @@ Starting your application is incredibly easy:
 ```
 docker-compose up
 ```
-Once up, it will be available under http://localhost:4001
+Once up, it will be available under http://localhost:4000
 
 
 ## Notes
