@@ -2,7 +2,7 @@
 version: '2'
 services:
   app:
-    image: phoenix:1.3.0
+    image: phoenix:1.3.1
     build: .
     ports:
       - "4000:4000"
@@ -12,4 +12,3 @@ services:
       - db
   db:
     image: postgres:9
-

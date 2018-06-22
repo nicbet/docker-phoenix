@@ -18,11 +18,11 @@ dockerized development and runtime environment.
 ### Getting Started
 It's so simple: just clone this repository.
 
-You can specify a particular Phoenix version by targeting the corresponding branch of this repository.
+You can specify a particular Phoenix version by targeting the corresponding release tag of this repository.
 
-For instance, for a dockerized development environment for Phoenix 1.3.0 you could run:
+For instance, for a dockerized development environment for Phoenix 1.3.1 you could run:
 ```
-git clone -b 1.3 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.3.1 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 
@@ -92,5 +92,3 @@ To run commands other than `mix` tasks, you can use the `./run` script.
 ```
 ./run iex -S mix
 ```
-
-## Todo
