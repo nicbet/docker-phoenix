@@ -1,10 +1,10 @@
-FROM elixir:1.5.1
+FROM elixir:1.6.2
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force  https://github.com/phoenixframework/archives/raw/master/phx_new-1.3.0.ez \
+ && mix archive.install --force  https://github.com/phoenixframework/archives/raw/master/phx_new-1.3.1.ez \
  && apt-get update \
- && curl -sL https://deb.nodesource.com/setup_6.x | bash \
+ && curl -sL https://deb.nodesource.com/setup_8.x | bash \
  && apt-get install -y apt-utils \
  && apt-get install -y nodejs \
  && apt-get install -y build-essential \

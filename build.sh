@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t phoenix:1.3.0 .
+docker build -t phoenix:1.3.1 .
