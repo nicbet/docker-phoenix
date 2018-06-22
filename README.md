@@ -8,21 +8,18 @@ after I found myself working on multiple different projects that were built on d
 Phoenix versions. This reminded me a lot of the early Ruby and Rails days (and fighting
 rbenv and bundle).
 
-Welcome to 2016, the year of Docker. This project was conceived to deal with the issues
-of running different Elixir and Phoenix versions and supporting the development of apps
-built with different Elixir and Phoenix versions.
+This project was conceived to deal with the issues of running different Elixir and Phoenix
+versions and supporting the development of apps built with different Elixir and Phoenix versions.
 
-Each directory is versioned after a specific Phoenix version and contains a version-specific
-dockerized development and runtime environment.
 
 ### Getting Started
 It's so simple: just clone this repository.
 
 You can specify a particular Phoenix version by targeting the corresponding release tag of this repository.
 
-For instance, for a dockerized development environment for Phoenix 1.3.2 you could run:
+For instance, for a dockerized development environment for Phoenix 1.3.3 you could run:
 ```
-git clone -b 1.3.2 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.3.3 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 
@@ -39,7 +36,9 @@ Initialize a new phoenix application. The following command will create a new Ph
 Why does this work? The `docker-compose.yml` file specifies that your local `src/` directory is mapped inside the docker container as `/app`. And `/app` in the container is marked as the working directory for any command that is being executed, such as `mix phoenix.new`.
 
 **NOTE:** It is important to specify your app name through the `--app <name>` option, as Phoenix will otherwise name your app from the target directory passed in, which in our case is `.`
+
 **NOTE:** It is okay to answer `Y` when phoenix states that the `/app` directory already exists.
+
 **NOTE:** Starting from 1.3.0 the `mix phoenix.new` command has been deprecated. You will have to use the `phx.new` command instead of `phoenix.new` or `mix deps.get` will fail!
 
 ### Alternative: Existing Application
