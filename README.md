@@ -22,7 +22,7 @@ You can specify a particular Phoenix version by targeting the corresponding rele
 
 For instance, for a dockerized development environment for Phoenix 1.3.1 you could run:
 ```
-git clone -b 1.3.1 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.3.2 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 
