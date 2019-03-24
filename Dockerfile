@@ -1,10 +1,10 @@
-FROM elixir:1.7.4
+FROM elixir:1.8.1
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force hex phx_new 1.4.0 \
+ && mix archive.install --force hex phx_new 1.4.1 \
  && apt-get update \
- && curl -sL https://deb.nodesource.com/setup_8.x | bash \
+ && curl -sL https://deb.nodesource.com/setup_10.x | bash \
  && apt-get install -y apt-utils \
  && apt-get install -y nodejs \
  && apt-get install -y build-essential \

@@ -2,7 +2,7 @@
 version: '2'
 services:
   app:
-    image: phoenix:1.4.0
+    image: nicbet/phoenix:1.4.1
     build: .
     ports:
       - "4000:4000"
