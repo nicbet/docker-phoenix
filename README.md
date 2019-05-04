@@ -11,15 +11,21 @@ rbenv and bundle).
 This project was conceived to deal with the issues of running different Elixir and Phoenix
 versions and supporting the development of apps built with different Elixir and Phoenix versions.
 
+### New: Support for VS Code Remote Extension
+After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a
+full Development Environment (with PostgreSQL Database) spun up automatically. 
+
+See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers)
+for more details.
 
 ### Getting Started
 It's so simple: just clone this repository.
 
 You can specify a particular Phoenix version by targeting the corresponding release tag of this repository.
 
-For instance, for a dockerized development environment for Phoenix 1.4.3 you could run:
+For instance, for a dockerized development environment for Phoenix 1.4.4 you could run:
 ```
-git clone -b 1.4.3 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.4.4 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 

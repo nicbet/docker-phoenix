@@ -1,0 +1,26 @@
+---
+version: '2'
+services:
+  app:
+    image: nicbet/phoenix:1.4.4
+    build:
+      context: ..
+      dockerfile: Dockerfile
+    command: sleep infinity
+    ports:
+      - "4000:4000"
+    volumes:
+      # Mounts the project folder to '/workspace'. The target path inside the container
+      # should match should match what your application expects. In this case, the
+      # compose file is in a sub-folder, so we will mount '..'. We'll then reference this
+      # as the workspaceFolder in '.devcontainer/devcontainer.json' so VS Code starts here.
+      - ..:/app
+
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
+    depends_on:
+      - db
+  db:
+    image: postgres:10
+    volumes:
+      - /var/lib/postgresql/data
