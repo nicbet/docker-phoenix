@@ -2,7 +2,7 @@ FROM elixir:1.8.1
 MAINTAINER Nicolas Bettenburg <nicbet@gmail.com>
 
 RUN mix local.hex --force \
- && mix archive.install --force hex phx_new 1.4.4 \
+ && mix archive.install --force hex phx_new 1.4.5 \
  && apt-get update \
  && curl -sL https://deb.nodesource.com/setup_10.x | bash \
  && apt-get install -y apt-utils \
