@@ -1,2 +1,2 @@
-#!/bin/bash
-docker-compose run --rm app mix "$@"
+#!/usr/bin/env bash
+./run mix "$@"
