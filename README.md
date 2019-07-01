@@ -28,6 +28,9 @@ For instance, for a dockerized development environment for Phoenix 1.4.8 you cou
 git clone -b 1.4.8 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
+### New with Elixir 1.9: Releases
+Follow this [Github Gist]
+(https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1) to prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp).
 
 ### New Application from Scratch
 Navigate the to where you cloned this repository, for example:
