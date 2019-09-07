@@ -1,2 +1,2 @@
 #!/usr/bin/env bash
-./run mix "$@"
+./run mix $@
