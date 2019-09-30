@@ -1,5 +1,8 @@
 # Dockerized Elixir/Phoenix Development Environment
 
+![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/nicbet/docker-phoenix)
+![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/nicbet/phoenix)
+
 ### Introduction
 I have been working on a long-running personal Phoenix project since Phoenix 1.0.2.
 Over the past year and a half or so, Phoenix and Elixir have undergone numerous changes,
@@ -13,7 +16,7 @@ versions and supporting the development of apps built with different Elixir and 
 
 ### New: Support for VS Code Remote Extension
 After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a
-full Development Environment (with PostgreSQL Database) spun up automatically. 
+full Development Environment (with PostgreSQL Database) spun up automatically.
 
 See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers)
 for more details.
