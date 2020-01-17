@@ -26,9 +26,9 @@ It's so simple: just clone this repository.
 
 You can specify a particular Phoenix version by targeting the corresponding release tag of this repository.
 
-For instance, for a dockerized development environment for Phoenix 1.4.10 you could run:
+For instance, for a dockerized development environment for Phoenix 1.4.11 you could run:
 ```
-git clone -b 1.4.10 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.4.11 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 ### New with Elixir 1.9: Releases
