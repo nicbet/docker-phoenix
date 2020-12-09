@@ -1,2 +1,2 @@
 #!/bin/sh
-docker build -t nicbet/phoenix:1.5.2 .
+docker build -t nicbet/phoenix:1.5.3 .
