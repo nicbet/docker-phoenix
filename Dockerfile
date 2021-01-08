@@ -9,6 +9,8 @@ RUN mix local.hex --force \
   && apt-get install -y nodejs \
   && apt-get install -y build-essential \
   && apt-get install -y inotify-tools \
+  && apt-get install -y ruby \
+  && gem install htmlbeautifier \
   && mix local.rebar --force
 
 ENV APP_HOME /app
