@@ -1,12 +1,14 @@
 ---
-version: '2'
+version: '3'
 services:
   app:
-    image: nicbet/phoenix:1.5.7
     build:
-      context: ..
-      dockerfile: Dockerfile
+      context: ../
+      dockerfile: .devcontainer/Dockerfile
     command: sleep infinity
+    environment:
+      - PORT=4000
+      - BINDING=0.0.0.0
     ports:
       - "4000:4000"
     volumes:
@@ -14,13 +16,22 @@ services:
       # should match should match what your application expects. In this case, the
       # compose file is in a sub-folder, so we will mount '..'. We'll then reference this
       # as the workspaceFolder in '.devcontainer/devcontainer.json' so VS Code starts here.
-      - ..:/app
+      - ..:/app:cached
 
       # This lets you avoid setting up Git again in the container
       - ~/.gitconfig:/root/.gitconfig
     depends_on:
       - db
+
   db:
-    image: postgres:10
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - '5432'
     volumes:
-      - /var/lib/postgresql/data
+      - "database:/var/lib/postgresql/data"
+
+volumes:
+  database:
