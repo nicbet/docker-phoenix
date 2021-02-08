@@ -1,14 +1,33 @@
 ---
-version: '2'
+version: '3'
 services:
   app:
-    image: nicbet/phoenix:1.5.7
-    build: .
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    command: sleep infinity
+    environment:
+      - PORT=4000
+      - BINDING=0.0.0.0
     ports:
       - "4000:4000"
     volumes:
-      - ./src:/app
+      - .:/app:cached
+
+      # This lets you avoid setting up Git again in the container
+      - ~/.gitconfig:/root/.gitconfig
     depends_on:
       - db
+
   db:
-    image: postgres:10
+    image: postgres:12
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    expose:
+      - '5432'
+    volumes:
+      - "database:/var/lib/postgresql/data"
+
+volumes:
+  database:
