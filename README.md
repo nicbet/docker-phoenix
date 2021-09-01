@@ -37,8 +37,8 @@ git clone -b 1.5.12 https://github.com/nicbet/docker-phoenix ~/Projects/hello-ph
 
 ### New with Elixir 1.9: Releases
 
-Follow this [Github Gist]
-(https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1) to prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp).
+Follow this [Github Gist](https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1)
+to prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp).
 
 ### New Application from Scratch
 
