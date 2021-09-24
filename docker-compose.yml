@@ -2,7 +2,7 @@
 version: "2"
 services:
   app:
-    image: nicbet/phoenix:1.5.12
+    image: nicbet/phoenix:1.6.0
     build: .
     ports:
       - "4000:4000"
@@ -15,7 +15,7 @@ services:
     depends_on:
       - db
   db:
-    image: postgres:10
+    image: postgres:12
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
