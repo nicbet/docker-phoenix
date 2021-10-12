@@ -1,4 +1,4 @@
-FROM nicbet/phoenix:1.6.0
+FROM nicbet/phoenix:1.6.2
 
 RUN apt-get install -y ruby \
   && gem install --no-ri --no-rdoc htmlbeautifier \
