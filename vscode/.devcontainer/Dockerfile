@@ -6,3 +6,9 @@ RUN apt-get install -y ruby \
   && apt-get autoremove -y \
   && apt-get clean -y \
   && rm -rf /var/lib/apt/lists/*
+
+ARG APP_HOME /app
+RUN mkdir -p $APP_HOME
+WORKDIR $APP_HOME
+
+CMD ["mix", "phx.server"]
