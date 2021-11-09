@@ -1,5 +1,4 @@
 #!/bin/bash
 
-DOCKERUSER=restlessronin
-docker manifest create ${DOCKERUSER}/phoenix:$1 --amend ${DOCKERUSER}/phoenix:amd64-$1 --amend ${DOCKERUSER}/phoenix:arm64-$1
-docker manifest push ${DOCKERUSER}/phoenix:$1 
+docker manifest create nicbet/phoenix:$1 --amend nicbet/phoenix:amd64-$1 --amend nicbet/phoenix:arm64-$1
+docker manifest push nicbet/phoenix:$1 
