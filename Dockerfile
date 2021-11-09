@@ -1,8 +1,8 @@
 FROM elixir:1.12.3
 LABEL maintainer="Nicolas Bettenburg <nicbet@gmail.com>"
 
-ENV PHOENIX_VERSION=1.6.2
-ENV NODEJS_VERSION=17.x
+ARG PHOENIX_VERSION=1.6.2
+ARG NODEJS_VERSION=12.x
 
 RUN mix local.hex --force \
   && mix archive.install --force hex phx_new ${PHOENIX_VERSION} \
