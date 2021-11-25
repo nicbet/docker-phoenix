@@ -1,12 +1,12 @@
 OWNER = nicbet
 IMAGE = phoenix
 TAG = $(OWNER)/$(IMAGE)
-VERSION = latest
+VERSION = 1.6.2
 
 all: test
 
 .DEFAULT: all
-.PHONY: mrproper pull image-scan test
+.PHONY: mrproper latest pull image-scan test
 
 # Build the docker image
 docker-image: Dockerfile
@@ -17,6 +17,11 @@ docker-image: Dockerfile
 pull:
 	$(info Pulling image with tag $(TAG):$(VERSION))
 	@docker pull $(TAG):$(VERSION)
+
+# Tag current version as latest
+latest:
+	$(info Tagging $(TAG):$(VERSION) as $(TAG):latest)
+	@docker tag $(TAG):$(VERSION) $(TAG):latest
 
 # Delete all images for $(tag)
 mrproper: clean
