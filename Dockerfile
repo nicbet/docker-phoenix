@@ -2,6 +2,7 @@ FROM elixir:1.12.3
 
 # Apt
 RUN apt-get update && apt-get upgrade -y
+RUN apt-get install -y apt-utils
 RUN apt-get install -y build-essential
 RUN apt-get install -y inotify-tools
 

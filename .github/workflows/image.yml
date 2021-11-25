@@ -12,6 +12,10 @@ jobs:
         name: checkout code
         uses: actions/checkout@v2
       -
+        name: Set up QEMU
+        id: qemu
+        uses: docker/setup-qemu-action@v1
+      -
         name: setup Docker buildx
         id: buildx
         uses: docker/setup-buildx-action@v1
