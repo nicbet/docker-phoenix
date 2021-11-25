@@ -2,8 +2,10 @@ name: Build nicbet/phoenix
 
 on:
   push:
-    branches: master
-
+    branches:
+      - "!*"
+    tags:
+      - "v*"
 jobs:
   build:
     runs-on: ubuntu-latest
