@@ -28,7 +28,7 @@ You can specify a particular Phoenix version by targeting the corresponding rele
 For instance, for a dockerized development environment for Phoenix 1.6.0 you could run:
 
 ```
-git clone -b 1.6.0 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b v1.6.2 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 ```
 
 ### New with Elixir 1.9: Releases
