@@ -32,4 +32,4 @@ jobs:
         run: |
           docker build \
             --tag nicbet/phoenix:latest \
-            --platform linux/amd64,linux/arm64/v8 .
+            --platform linux/amd64,linux/arm64/v8 --push .
