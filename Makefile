@@ -1,0 +1,31 @@
+OWNER = nicbet
+IMAGE = phoenix
+TAG = $(OWNER)/$(IMAGE)
+VERSION = latest
+
+all: test
+
+.DEFAULT: all
+.PHONY: mrproper pull image-scan test
+
+# Build the docker image
+docker-image: Dockerfile
+	$(info Building image with tag $(TAG):$(VERSION))
+	@docker build -t $(TAG):$(VERSION) --no-cache .
+
+# Fetch the image from docker.io (requires `docker login` for private repositories)
+pull:
+	$(info Pulling image with tag $(TAG):$(VERSION))
+	@docker pull $(TAG):$(VERSION)
+
+# Delete all images for $(tag)
+mrproper: clean
+	$(info Removing images for tag $(TAG):$(VERSION) and pruning related images.)
+	-docker rmi $(TAG):$(VERSION) >/dev/null 2>&1
+	-docker rmi $(shell docker images -a --filter=dangling=true -q) >/dev/null 2>&1
+
+image-scan:
+	$(info Scanning docker image for vulnerabilities with trivy ...)
+	@trivy image $(TAG):$(VERSION)
+
+test: image-scan

@@ -1,0 +1,31 @@
+name: Build nicbet/phoenix
+
+on:
+  push:
+    branches: master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: checkout code
+        uses: actions/checkout@v2
+      -
+        name: setup Docker buildx
+        id: buildx
+        uses: docker/setup-buildx-action@v1
+        with:
+          install: true
+          config-inline: |
+            [registry."docker.io"]
+              mirrors = ["ghcr.io"]
+      -
+        name: login to docker hub
+        run: echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.DOCKER_USERNAME }}" --password-stdin
+      -
+      name: build multiarch image
+      run: |
+        docker build \
+          --tag nicbet/phoenix:latest \
+          --platform linux/amd64,linux/arm64/v8 .

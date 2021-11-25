@@ -3,27 +3,23 @@
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/nicbet/docker-phoenix)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/nicbet/phoenix)
 
-### Introduction
+## Introduction
 
-I have been working on a long-running personal Phoenix project since Phoenix 1.0.2.
-Over the past year and a half or so, Phoenix and Elixir have undergone numerous changes,
-and some of them (okay most of them) broke my application code. Things really went south
-after I found myself working on multiple different projects that were built on different
-Phoenix versions. This reminded me a lot of the early Ruby and Rails days (and fighting
-rbenv and bundle).
+A dockerized development environment for Elixir / Phoenix Framework projects. Makes it easy to work on projects with different Phoenix framework or Elixir versions and keeps the host environment pristine.
 
-This project was conceived to deal with the issues of running different Elixir and Phoenix
-versions and supporting the development of apps built with different Elixir and Phoenix versions.
+### Background
+
+I have been working on a long-running personal Phoenix project since Phoenix 1.0.2. Over the past year and a half or so, Phoenix and Elixir have undergone numerous changes, and some of them (okay most of them) broke my application code. Things really went south after I found myself working on multiple different projects that were built on different Phoenix versions. This reminded me a lot of the early Ruby and Rails days (and fighting rbenv and bundle).
+
+This project was conceived to deal with the issues of running different Elixir and Phoenix versions and supporting the development of apps built with different Elixir and Phoenix versions.
 
 ### New: Support for VS Code Remote Extension
 
-After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a
-full Development Environment (with PostgreSQL Database) spun up automatically.
+After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a full Development Environment (with PostgreSQL Database) spun up automatically.
 
-See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers)
-for more details.
+See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers) for more details.
 
-### Getting Started
+## Getting Started
 
 It's so simple: just clone this repository.
 
@@ -39,6 +35,8 @@ git clone -b 1.6.0 https://github.com/nicbet/docker-phoenix ~/Projects/hello-pho
 
 Follow this [Github Gist](https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1)
 to prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp).
+
+## Usage
 
 ### New Application from Scratch
 
@@ -142,4 +140,12 @@ To run commands other than `mix` tasks, you can use the `./run` script.
 
 ```
 ./run iex -S mix
+```
+
+## Building the image for your platform
+
+You can locally build the container image with the included Makefile:
+
+```sh
+make docker-image
 ```
