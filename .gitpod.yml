@@ -4,8 +4,8 @@ tasks:
       docker-compose -f docker-compose.yml pull
     command: |
       docker-compose -f docker-compose.yml up --no-start
-      && docker-compose -f docker-compose.yml start db
-      && docker-compose -f docker-compose.yml run --service-ports app bash
+      docker-compose -f docker-compose.yml start db
+      docker-compose -f docker-compose.yml run --service-ports app bash
 
 ports:
   - port: 4000
