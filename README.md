@@ -19,6 +19,16 @@ After cloning this repository, open the folder in Visual Studio Code's Remote Ex
 
 See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers) for more details.
 
+### New: Support for Gitpod Workspaces
+
+After cloning this repository, open the URL of any branch in gitpod to get a full Cloud Development Environment (with PostgreSQL Database) spun up automatically. This has been tested on Github, but the same basic idea should work on Gitlab, Bitbucket, etc.
+
+See https://www.gitpod.io/docs/getting-started if you're unfamiliar with Gitpod
+
+To see a demo, open this repo on Gitpod by clicking the button below
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/restlessronin/docker-phoenix/tree/enable-gitpod)
+
 ## Getting Started
 
 It's so simple: just clone this repository.
