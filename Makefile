@@ -1,7 +1,7 @@
 OWNER = nicbet
 IMAGE = phoenix
 TAG = $(OWNER)/$(IMAGE)
-VERSION = 1.6.10
+VERSION = 1.6.11
 
 all: test
 
