@@ -1,58 +1,59 @@
-# Dockerized Elixir/Phoenix Development Environment
+# A Containerized Dev Environment for Elixir and the Phoenix Framework
 
 ![GitHub tag (latest SemVer)](https://img.shields.io/github/v/tag/nicbet/docker-phoenix)
 ![Docker Cloud Build Status](https://img.shields.io/docker/cloud/build/nicbet/phoenix)
 
 ## Introduction
 
-A dockerized development environment for Elixir / Phoenix Framework projects. Makes it easy to work on projects with different Phoenix framework or Elixir versions and keeps the host environment pristine.
+A dockerized development environment to work on [Elixir](https://github.com/elixir-lang/elixir) and [Phoenix](https://github.com/phoenixframework/phoenix) framework projects while keeping the host environment pristine.
 
 ### Background
 
-I have been working on a long-running personal Phoenix project since Phoenix 1.0.2. Over the past year and a half or so, Phoenix and Elixir have undergone numerous changes, and some of them (okay most of them) broke my application code. Things really went south after I found myself working on multiple different projects that were built on different Phoenix versions. This reminded me a lot of the early Ruby and Rails days (and fighting rbenv and bundle).
+This project was conceived to deal with the issues of running different Elixir and Phoenix versions and supporting the development and maintenance of apps built with different Elixir and Phoenix versions.
 
-This project was conceived to deal with the issues of running different Elixir and Phoenix versions and supporting the development of apps built with different Elixir and Phoenix versions.
-
-### New: Support for VS Code Remote Extension
-
-After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a full Development Environment (with PostgreSQL Database) spun up automatically.
-
-See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers) for more details.
+Maybe you are working on multiple different projects, built with different versions of the Phoenix framework, or you are working on a long-lived Elixir or Phoenix project. In either case you are likely to hit a version conflict. Phoenix and Elixir are still young und evolving which is great - but some of the changes will likely break your application code. This repository aims to make things easier for you by giving you a straightforward path in swapping out your Elixir and Phoenix environment.
 
 ## Getting Started
 
-It's so simple: just clone this repository.
+To initialize a new development environment, clone this repository. You can specify a version tag to target a particular Phoenix framework version. We automatically pin the Elixir version of each release to the version of Elixir that was available at the time of the specific Phoenix framework release.
 
-You can specify a particular Phoenix version by targeting the corresponding release tag of this repository.
+For instance, to set up a dockerized development environment for a project called `hello-phoenix` using Phoenix framework version `1.6.6` you would run:
 
-For instance, for a dockerized development environment for Phoenix 1.6.6 you could run:
-
-```
+```sh
+# Clone this repository into a new project folder
 git clone -b 1.6.6 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+
+# Go to the new project folder
+cd ~/Projects/hello-phoenix
+
+# Initialize a new git repository
+rm -rf .git
+git init
 ```
-
-### New with Elixir 1.9: Releases
-
-Follow this [Github Gist](https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1)
-to prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp).
 
 ## Usage
 
-### New Application from Scratch
+You can interact with the containerized dev environment in any way that you would usually interact with a container. We've included a handful of covenience scripts to make running common commands and tools inside the container easier from the host environment.
 
-Navigate the to where you cloned this repository, for example:
+Our recommended path however is to open the cloned repository in VSCode, following the prompts for starting the `devcontainer` environment. This will give you an editor and a terminal inside the container directly from VSCode.
 
-```
-cd ~/Projects/hello-phoenix
-```
+### New Application
 
-Initialize a new phoenix application. The following command will create a new Phoenix application called `hello` under the `src/` directory, which is mounted inside the container under `/app` (the default work dir).
+To create a completely new application from scratch, you can follow these steps:
 
-```
-./mix phx.new . --app hello
-```
+1. Navigate the to where you cloned this repository, for example:
 
-Why does this work? The `docker-compose.yml` file specifies that your local `src/` directory is mapped inside the docker container as `/app`. And `/app` in the container is marked as the working directory for any command that is being executed, such as `mix phoenix.new`.
+   ```
+   cd ~/Projects/hello-phoenix
+   ```
+
+2. Initialize a new Phoenix application. For example, to create a new Phoenix application called `hello` under the `src/` directory, which is mounted inside the container under `/app` (the default work dir) run:
+
+   ```
+   ./mix phx.new . --app hello
+   ```
+
+   > Why does this work? The `docker-compose.yml` file inlcuded with this repo maps your local `src/` directory to the `/app` directory inside the container. Inside the container, the `/app` directory is marked as the working directory for any command that is being executed, such as `mix phoenix.new`.
 
 **NOTE:** It is important to specify your app name through the `--app <name>` option, as Phoenix will otherwise name your app from the target directory passed in, which in our case is `.`
 
@@ -60,21 +61,17 @@ Why does this work? The `docker-compose.yml` file specifies that your local `src
 
 **NOTE:** Starting from 1.3.0 the `mix phoenix.new` command has been deprecated. You will have to use the `phx.new` command instead of `phoenix.new` or `mix deps.get` will fail!
 
-### Alternative: Existing Application
+### Existing Application
 
-Copy your existing code Phoenix application code to the `src/` directory in the cloned repository.
+To use this dev environment with an existing project, follow the steps above to clone this repository and then copy your existing code Phoenix application code to the `<project-name>/src` directory. The `src/` directory won't exist after cloning this repo so you'll have to create it first with `mkdir -p <project-name>/src`.
 
-**NOTE:** the `src/` directory won't exist so you'll have to create it first.
+### Database Connection
 
-### Database
-
-#### Preparation
-
-The `docker-compose.yml` file defines a database service container named `db` running a PostgreSQL database that is available to the main application container via the hostname `db`. By default Phoenix assumes that you are running a database locally.
+The `docker-compose.yml` file included with this repository defines a servicecalled `db` for running a PostgreSQL database that is available to the main application container via the hostname `db`. By default Phoenix assumes that you are running a database locally. In order to use the `db` service with your application you will need to modify your Phoenix config and point `Ecto` to the database host.
 
 Modify the Ecto configuration `src/config/dev.exs` to point to the DB container:
 
-```
+```elixir
 # Configure your database
 config :test, Test.Repo,
   adapter: Ecto.Adapters.Postgres,
@@ -85,60 +82,55 @@ config :test, Test.Repo,
   pool_size: 10
 ```
 
-#### Initialize the Database with Ecto
+#### Initialize the Database
 
-When you first start out, the `db` container will have no databases. Let's initialize a development DB using Ecto:
+When you first start out, the `db` service will contain no databases. To initialize a database for your project, you can run the included convenience script from your host environment:
 
-```
+```sh
 ./mix ecto.create
 ```
 
-If you copied an existing application, now would be the time to run your database migrations.
+Then, run your database migrations:
 
 ```
 ./mix ecto.migrate
 ```
 
+If you are working inside the dev environment (i.e., using the devcontainer terminal from VSCode), skip the `./` in front of the commands.
+
 ### Starting the Application
 
-Starting your application is incredibly easy, you can either run:
+To start you application in development mode you will first need to change your Phoenix configuration to bind the `phx.server` to `0.0.0.0`, so that the container exposes the `phx.server` to the host network.
 
+To bind the `phx.server` to all interfaces, edit your `config/dev.exs` file and set the endpoint listen address to `0.0.0.0`:
+
+```elixir
+config :hello_world, HelloWorldWeb.Endpoint,
+  http: [ip: {0, 0, 0, 0}, port: 4000],
+  ...
 ```
+
+you can run the following command from your host environment:
+
+```sh
 docker-compose up
 ```
 
-or
+Alternatively, if you just want to run the Phoenix application server you can execute:
 
-```
+```sh
 ./mix phx.server
 ```
 
-Once up, it will be available under http://localhost:4000.
-
-You may need to update `config/dev.exs` and set the endpoint listen address to `0.0.0.0` like so:
-
-```
-config :hello_world, HelloWorldWeb.Endpoint,
-  # Binding to loopback ipv4 address prevents access from other machines.
-  # Change to `ip: {0, 0, 0, 0}` to allow access from other machines.
-  http: [ip: {0, 0, 0, 0}, port: 4000],
-  check_origin: false,
-  code_reloader: true,
-  debug_errors: true,
-  secret_key_base: "rM/QJOrRiW+3WWLw+lHJ8kUFJK/LTrwakSG/ftGYl8jYN0FKqfgS50l2C9BdKMoK",
-  watchers: [
-    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
-    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]}
-  ]
-```
+Once booted, it will be available under http://localhost:4000.
 
 ## Notes
 
-### Executing custom commands
+### Custom commands
 
-To run commands other than `mix` tasks, you can use the `./run` script.
+To run any command inside the dev container, you can use the `./run` script and pass the command and its arguments.
 
-```
+```sh
 ./run iex -S mix
 ```
 
@@ -149,3 +141,13 @@ You can locally build the container image with the included Makefile:
 ```sh
 make docker-image
 ```
+
+## Support for VS Code Remote Extension
+
+After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a full Development Environment (with PostgreSQL Database) spun up automatically.
+
+See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers) for more details.
+
+## Releases with Elixir 1.9+
+
+To prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp) you can follow this [Github Gist](https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1).
