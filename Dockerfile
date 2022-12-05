@@ -1,15 +1,10 @@
-FROM elixir:1.14.1
+FROM elixir:1.14.1-alpine
 
 # Build Args
 ARG PHOENIX_VERSION=1.6.15
-ARG NODEJS_VERSION=18.x
 
-# Apt
-RUN apt-get update && apt-get upgrade -y && apt-get install -y apt-utils build-essential inotify-tools
-
-# Nodejs
-RUN curl -sL https://deb.nodesource.com/setup_${NODEJS_VERSION} | bash
-RUN apt-get install -y nodejs
+# Apk
+RUN apk add bash git inotify-tools nodejs-current npm yarn
 
 # Phoenix
 RUN mix local.hex --force

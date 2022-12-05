@@ -6,8 +6,8 @@
     "forwardPorts": [4000],
     "shutdownAction": "stopCompose",
     "extensions": [
-        "mjmcloug.vscode-elixir",
         "jakebecker.elixir-ls",
         "florinpatrascu.vscode-elixir-snippets",
+        "phoenixframework.phoenix"
     ],
 }
