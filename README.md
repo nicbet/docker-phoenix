@@ -14,11 +14,11 @@ Maybe you are working on multiple different projects, built with different versi
 
 To initialize a new development environment, clone this repository. You can specify a version tag to target a particular Phoenix framework version. We automatically pin the Elixir version of each release to the version of Elixir that was available at the time of the specific Phoenix framework release.
 
-For instance, to set up a dockerized development environment for a project called `hello-phoenix` using Phoenix framework version `1.6.12` you would run:
+For instance, to set up a dockerized development environment for a project called `hello-phoenix` using Phoenix framework version `1.6.13` you would run:
 
 ```sh
 # Clone this repository into a new project folder
-git clone -b 1.6.12 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+git clone -b 1.6.13 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
 
 # Go to the new project folder
 cd ~/Projects/hello-phoenix

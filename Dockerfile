@@ -1,8 +1,8 @@
 FROM elixir:1.14.0
 
 # Build Args
-ARG PHOENIX_VERSION=1.6.12
-ARG NODEJS_VERSION=16.x
+ARG PHOENIX_VERSION=1.6.13
+ARG NODEJS_VERSION=18.x
 
 # Apt
 RUN apt-get update && apt-get upgrade -y
