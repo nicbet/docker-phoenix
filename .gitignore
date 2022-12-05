@@ -1,3 +1,4 @@
 .vscode
+.elixir_ls
 tags
-/src
+/app

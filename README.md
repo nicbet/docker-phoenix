@@ -4,98 +4,71 @@
 
 A dockerized development environment to work on [Elixir](https://github.com/elixir-lang/elixir) and [Phoenix](https://github.com/phoenixframework/phoenix) framework projects while keeping the host environment pristine.
 
-### Background
-
 This project was conceived to deal with the issues of running different Elixir and Phoenix versions and supporting the development and maintenance of apps built with different Elixir and Phoenix versions.
 
 Maybe you are working on multiple different projects, built with different versions of the Phoenix framework, or you are working on a long-lived Elixir or Phoenix project. In either case you are likely to hit a version conflict. Phoenix and Elixir are still young und evolving which is great - but some of the changes will likely break your application code. This repository aims to make things easier for you by giving you a straightforward path in swapping out your Elixir and Phoenix environment.
 
+## Notable Changes
+
+- **#1d570c14007b7750da776e0b6bd2b7568ec67de5**
+  We've switched the default branch of the repository from `master` to `main`. Please update your local repository refs!
+
+- **Docker Phoenix 1.6.15**
+  We are currently in the process of switching to `Alpine Linux` based images, which are significantly smaller (~150MB vs 1.7GB). Expect the next release to make `-alpine` the new default for the dev environments. As a result, you will need to rebuild your VSCode dev containers and your application code.
+
+- **Docker Phoenix 1.6.13**
+  Starting with this version, we've switched the Docker image hosted at Docker Hub (`docker pull nicbet/phoenix:1.6.13`) to M1 Mac, i.e., `linux/arm64/v8` architecture. If you are developing on an Intel machine, you will need to build the docker image on your platform to get started run `make docker-image`.
+
 ## Getting Started
 
-To initialize a new development environment, clone this repository. You can specify a version tag to target a particular Phoenix framework version. We automatically pin the Elixir version of each release to the version of Elixir that was available at the time of the specific Phoenix framework release.
+As of December 2022, we recommend using the [Visual Studio Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers) approach over the command line. See below for details.
 
-For instance, to set up a dockerized development environment for a project called `hello-phoenix` using Phoenix framework version `1.6.15` you would run:
+### Visual Studio Code (Dev Containers)
 
-```sh
-# Clone this repository into a new project folder
-git clone -b 1.6.15 https://github.com/nicbet/docker-phoenix ~/Projects/hello-phoenix
+#### Setting up a brand-new project
 
-# Go to the new project folder
-cd ~/Projects/hello-phoenix
+If you are using a recent version of [Visual Studio Code](https://code.visualstudio.com/) with the [Dev Containers extension](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers), we highly recommend going this route for a much improved development experience out of the box.
 
-# Initialize a new git repository
-rm -rf .git
-git init
-```
+1. Use [Degit](https://github.com/Rich-Harris/degit) to quickly clone this project as a scaffold for your new project, for example an app called `hello_world`.
 
-## Usage
-
-You can interact with the containerized dev environment in any way that you would usually interact with a container. We've included a handful of covenience scripts to make running common commands and tools inside the container easier from the host environment.
-
-Our recommended path however is to open the cloned repository in VSCode, following the prompts for starting the `devcontainer` environment. This will give you an editor and a terminal inside the container directly from VSCode.
-
-### New Application
-
-To create a completely new application from scratch, you can follow these steps:
-
-1. Navigate the to where you cloned this repository, for example:
-
-   ```
-   cd ~/Projects/hello-phoenix
+   ```css
+   npx degit nicbet/docker-phoenix#1.6.15 hello_world
    ```
 
-2. Initialize a new Phoenix application. For example, to create a new Phoenix application called `hello` under the `src/` directory, which is mounted inside the container under `/app` (the default work dir) run:
+2. Open the `hello_world` folder in Visual Studio Code
 
+3. When asked, select `Reopen in container`. Visual Studio code will create a complete application stack including a PostgreSQL database, and mount your local `./app` folder as the root folder for the development environment.
+
+4. After initialization of your dev environment finishes, open the `Terminal` tab in Visual Studio Code.
+
+5. Create your new Phoenix application with the following command (**note the `.`**!):
+
+   ```bash
+   mix phx.new . hello_world
    ```
-   ./mix phx.new . --app hello
-   ```
 
-   > Why does this work? The `docker-compose.yml` file inlcuded with this repo maps your local `src/` directory to the `/app` directory inside the container. Inside the container, the `/app` directory is marked as the working directory for any command that is being executed, such as `mix phoenix.new`.
+6. As the mix command runs, you will see your Visual Studio Code file explorer populate with the files of your new phoenix app. All these files are available outside your development environment in the `./app` folder.
 
-**NOTE:** It is important to specify your app name through the `--app <name>` option, as Phoenix will otherwise name your app from the target directory passed in, which in our case is `.`
+**Note:** You don't need to use `degit`. Alternatively, you can clone this repository and remove the `.git` folder manually.
 
-**NOTE:** It is okay to answer `Y` when phoenix states that the `/app` directory already exists.
+#### Configuring the Database Connection
 
-**NOTE:** Starting from 1.3.0 the `mix phoenix.new` command has been deprecated. You will have to use the `phx.new` command instead of `phoenix.new` or `mix deps.get` will fail!
+Both, the docker-compose stack started with the `docker-compose.yml` file included with this repository and the Visual Studio Code Dev Containers stack define a service called `db` for running a PostgreSQL database that is available to the main application container via the hostname `db`. By default Phoenix assumes that you are running a database locally. In order to use the `db` service with your application you will need to modify your Phoenix config and point `Ecto` to the database host.
 
-### Existing Application
-
-To use this dev environment with an existing project, follow the steps above to clone this repository and then copy your existing code Phoenix application code to the `<project-name>/src` directory. The `src/` directory won't exist after cloning this repo so you'll have to create it first with `mkdir -p <project-name>/src`.
-
-### Database Connection
-
-The `docker-compose.yml` file included with this repository defines a servicecalled `db` for running a PostgreSQL database that is available to the main application container via the hostname `db`. By default Phoenix assumes that you are running a database locally. In order to use the `db` service with your application you will need to modify your Phoenix config and point `Ecto` to the database host.
-
-Modify the Ecto configuration `src/config/dev.exs` to point to the DB container:
+To use the included database with your phoenix application you will need to modify the Ecto configuration `config/dev.exs` and point it to the DB container:
 
 ```elixir
 # Configure your database
 config :test, Test.Repo,
   adapter: Ecto.Adapters.Postgres,
+  hostname: "db",
   username: "postgres",
   password: "postgres",
-  database: "test_dev",
-  hostname: "db",
+  # ...
   pool_size: 10
 ```
 
-#### Initialize the Database
-
-When you first start out, the `db` service will contain no databases. To initialize a database for your project, you can run the included convenience script from your host environment:
-
-```sh
-./mix ecto.create
-```
-
-Then, run your database migrations:
-
-```
-./mix ecto.migrate
-```
-
-If you are working inside the dev environment (i.e., using the devcontainer terminal from VSCode), skip the `./` in front of the commands.
-
-### Starting the Application
+#### Running your Application
 
 To start you application in development mode you will first need to change your Phoenix configuration to bind the `phx.server` to `0.0.0.0`, so that the container exposes the `phx.server` to the host network.
 
@@ -107,23 +80,19 @@ config :hello_world, HelloWorldWeb.Endpoint,
   ...
 ```
 
-you can run the following command from your host environment:
+From the VSCode terminal you can run the Phoenix application server with:
 
 ```sh
-docker-compose up
+mix phx.server
 ```
 
-Alternatively, if you just want to run the Phoenix application server you can execute:
+Once the startup is completed, your app will be available at http://localhost:4000
 
-```sh
-./mix phx.server
-```
+### Using the Command Line instead of Dev Containers
 
-Once booted, it will be available under http://localhost:4000.
+After cloning the repository, you can use the included `./run`, `./mix`, `./npm`, and `./yarn` scripts to execute commands in the development environment described by included `docker-compose.yml` file. For instance, running `./mix phx.new . hello_world` would generate a new phoenix application called `hello_world`. Similarly to the Visual Studio Code Dev Containers approach, your project files will be locally stored in the `./app` container which is mounted to `/app` inside the development environment.
 
-## Notes
-
-### Custom commands
+The instructions for changing the database connection and bind address as described above apply here as well.
 
 To run any command inside the dev container, you can use the `./run` script and pass the command and its arguments.
 
@@ -139,12 +108,28 @@ You can locally build the container image with the included Makefile:
 make docker-image
 ```
 
-## Support for VS Code Remote Extension
+## Usage with an existing project
 
-After cloning this repository, open the folder in Visual Studio Code's Remote Extension to get a full Development Environment (with PostgreSQL Database) spun up automatically.
+You can use this project to dockerize the development enviroment for an existing project. Follow the steps above, but instead of initializing a new application with `mix phx.new`, copy your existing project code to the `./app` subdirectory. This will make your existing code available in the dockerized dev environment.
 
-See [https://code.visualstudio.com/docs/remote/containers](https://code.visualstudio.com/docs/remote/containers) for more details.
+## Contributing
 
-## Releases with Elixir 1.9+
+This project is intended to be a safe, welcoming space for collaboration. Contributors are expected to adhere to the [Contributor Covenant](http://contributor-covenant.org) code of conduct. We recommend reading the [contributing guide](./docs/CONTRIBUTING.md) as well.
 
-To prepare a minimal Docker release image based on Alpine Linux (about 38MB for a Phoenix Webapp) you can follow this [Github Gist](https://gist.github.com/nicbet/102f16359828405ce34ca083976986e1).
+## License
+
+Docker Phoenix is available as open source under the terms of the [GNU Public License v3](https://www.gnu.org/licenses/gpl-3.0.en.html).
+
+## Contributors
+
+Docker Phoenix is built by members of the Open Source community, including:
+
+<img src="https://avatars.githubusercontent.com/apenney?s=64" alt="apenney" width="32" />
+<img src="https://avatars.githubusercontent.com/cruisemaniac?s=64" alt="cruisemaniac" width="32" />
+<img src="https://avatars.githubusercontent.com/homanchou?s=64" alt="homanchou" width="32" />
+<img src="https://avatars.githubusercontent.com/tmr08c?s=64" alt="tmr08c" width="32" />
+<img src="https://avatars.githubusercontent.com/jacknoble?s=64" alt="jacknoble" width="32" />
+<img src="https://avatars.githubusercontent.com/ravloony?s=64" alt="ravloony" width="32" />
+<img src="https://avatars.githubusercontent.com/asifaly?s=64" alt="asifaly" width="32" />
+<img src="https://avatars.githubusercontent.com/ajmeese7?s=64" alt="ajmeese7" width="32" />
+<img src="https://avatars.githubusercontent.com/restlessronin?s=64" alt="restlessronin" width="32" />
