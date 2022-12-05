@@ -1,7 +1,7 @@
 OWNER = nicbet
 IMAGE = phoenix
 TAG = $(OWNER)/$(IMAGE)
-VERSION = 1.6.13
+VERSION = 1.6.14
 
 all: test
 
@@ -11,7 +11,7 @@ all: test
 # Build the docker image
 docker-image: Dockerfile
 	$(info Building image with tag $(TAG):$(VERSION))
-	@docker build -t $(TAG):$(VERSION) --no-cache .
+	@docker build --no-cache -t $(TAG):$(VERSION) .
 
 # Fetch the image from docker.io (requires `docker login` for private repositories)
 pull:
