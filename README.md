@@ -6,7 +6,7 @@ A dockerized development environment to work on [Elixir](https://github.com/elix
 
 This project was conceived to deal with the issues of running different Elixir and Phoenix versions and supporting the development and maintenance of apps built with different Elixir and Phoenix versions.
 
-Maybe you are working on multiple different projects, built with different versions of the Phoenix framework, or you are working on a long-lived Elixir or Phoenix project. In either case you are likely to hit a version conflict. Phoenix and Elixir are still young und evolving which is great - but some of the changes will likely break your application code. This repository aims to make things easier for you by giving you a straightforward path in swapping out your Elixir and Phoenix environment.
+Maybe you are working on multiple different projects, built with different versions of the Phoenix framework, or you are working on a long-lived Elixir or Phoenix project. In either case you are likely to hit a version conflict. Phoenix and Elixir are still young and evolving which is great - but some of the changes will likely break your application code. This repository aims to make things easier for you by giving you a straightforward path in swapping out your Elixir and Phoenix environment.
 
 ## Notable Changes
 
