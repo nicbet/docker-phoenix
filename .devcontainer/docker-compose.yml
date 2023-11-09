@@ -1,5 +1,5 @@
 ---
-version: '3'
+version: "3"
 services:
   app:
     build:
@@ -24,12 +24,12 @@ services:
       - db
 
   db:
-    image: postgres:12
+    image: postgres:14
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     expose:
-      - '5432'
+      - "5432"
     volumes:
       - "database:/var/lib/postgresql/data"
 
