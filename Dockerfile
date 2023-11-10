@@ -1,7 +1,7 @@
-FROM elixir:1.14.5-alpine
+FROM elixir:1.15.7-alpine
 
 # Build Args
-ARG PHOENIX_VERSION=1.7.9
+ARG PHOENIX_VERSION=1.7.10
 
 # Apk
 RUN apk add bash build-base git inotify-tools nodejs-current npm yarn

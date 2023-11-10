@@ -1,7 +1,7 @@
 OWNER = nicbet
 IMAGE = phoenix
 TAG = $(OWNER)/$(IMAGE)
-VERSION = 1.7.9-alpine
+VERSION = 1.7.10-alpine
 
 all: docker-image test
 
