@@ -10,6 +10,9 @@ Maybe you are working on multiple different projects, built with different versi
 
 ## Notable Changes
 
+- **Docker Phoenix 1.7.5**
+  The image now includes the `build-base` package by default to support compile-time dependencies like `bcrypt` for `mix phx.gen.auth`
+
 - **#1d570c14007b7750da776e0b6bd2b7568ec67de5**
   We've switched the default branch of the repository from `master` to `main`. Please update your local repository refs!
 
@@ -32,7 +35,7 @@ If you are using a recent version of [Visual Studio Code](https://code.visualstu
 1. Use [Degit](https://github.com/Rich-Harris/degit) to quickly clone this project as a scaffold for your new project, for example an app called `hello_world`.
 
    ```css
-   npx degit nicbet/docker-phoenix#1.7.6 hello_world
+   npx degit nicbet/docker-phoenix#1.7.7 hello_world
    ```
 
 2. Open the `hello_world` folder in Visual Studio Code
