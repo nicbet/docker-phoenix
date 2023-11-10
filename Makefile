@@ -1,9 +1,9 @@
 OWNER = nicbet
 IMAGE = phoenix
 TAG = $(OWNER)/$(IMAGE)
-VERSION = 1.7.7-alpine
+VERSION = 1.7.8-alpine
 
-all: test
+all: docker-image test
 
 .DEFAULT: all
 .PHONY: mrproper latest pull image-scan test
