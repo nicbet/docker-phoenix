@@ -1,1 +1,2 @@
-./run sh -c "cd assets; yarn $@"
+#!/usr/bin/env bash
+docker-compose run --service-ports --rm  -w /app/assets app yarn $@
