@@ -10,6 +10,9 @@ Maybe you are working on multiple different projects, built with different versi
 
 ## Notable Changes
 
+- **Switch to Bullseye base image**
+  This is a potentially breaking change if you are using this image / repository as a base for your own customized images. We're switching from the upstream **Alpine** images to **Debian Bullseye** images, since most build tools and libraries, as well as the Erlang documentation are not included in the Alpine stream. Since the primary focus of this repository is to give developers easy access to the entire toolchain to build their Elixir/Phoenix applications with minimal requirements on the host, and as much of an optimal out-of-the-box dev experience with VSCode, we've decided that we'd rather have full toolchains and documentation over smaller image sizes.
+
 - **Docker Phoenix 1.7.10 **
   The default database for the `compose` stack and `devcontainer` is now PostgreSQL 16
 
@@ -130,12 +133,4 @@ Docker Phoenix is available as open source under the terms of the [GNU Public Li
 
 Docker Phoenix is built by members of the Open Source community, including:
 
-<img src="https://avatars.githubusercontent.com/apenney?s=64" alt="apenney" width="32" />
-<img src="https://avatars.githubusercontent.com/cruisemaniac?s=64" alt="cruisemaniac" width="32" />
-<img src="https://avatars.githubusercontent.com/homanchou?s=64" alt="homanchou" width="32" />
-<img src="https://avatars.githubusercontent.com/tmr08c?s=64" alt="tmr08c" width="32" />
-<img src="https://avatars.githubusercontent.com/jacknoble?s=64" alt="jacknoble" width="32" />
-<img src="https://avatars.githubusercontent.com/ravloony?s=64" alt="ravloony" width="32" />
-<img src="https://avatars.githubusercontent.com/asifaly?s=64" alt="asifaly" width="32" />
-<img src="https://avatars.githubusercontent.com/ajmeese7?s=64" alt="ajmeese7" width="32" />
-<img src="https://avatars.githubusercontent.com/restlessronin?s=64" alt="restlessronin" width="32" />
+<img src="https://avatars.githubusercontent.com/apenney?s=64" alt="apenney" width="32" />, <img src="https://avatars.githubusercontent.com/cruisemaniac?s=64" alt="cruisemaniac" width="32" />, <img src="https://avatars.githubusercontent.com/homanchou?s=64" alt="homanchou" width="32"/>, <img src="https://avatars.githubusercontent.com/tmr08c?s=64" alt="tmr08c" width="32" />, <img src="https://avatars.githubusercontent.com/jacknoble?s=64" alt="jacknoble" width="32" />, <img src="https://avatars.githubusercontent.com/ravloony?s=64" alt="ravloony" width="32" />, <img src="https://avatars.githubusercontent.com/asifaly?s=64" alt="asifaly" width="32" /> ,<img src="https://avatars.githubusercontent.com/ajmeese7?s=64" alt="ajmeese7" width="32" />, <img src="https://avatars.githubusercontent.com/restlessronin?s=64" alt="restlessronin" width="32" />

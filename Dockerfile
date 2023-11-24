@@ -1,10 +1,26 @@
-FROM elixir:1.15.7-alpine
+FROM elixir:1.15.7
 
 # Build Args
 ARG PHOENIX_VERSION=1.7.10
+ARG NODE_VERSION=20.10.0
 
-# Apk
-RUN apk add bash build-base git inotify-tools nodejs-current npm yarn
+# Dependencies
+RUN apt update \
+  && apt upgrade \
+  && apt install -y bash curl git build-essential inotify-tools
+
+# NodeJS
+ENV NVM_DIR /opt/nvm
+RUN mkdir -p ${NVM_DIR} \
+  && curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/master/install.sh | bash \
+  && . $NVM_DIR/nvm.sh \
+  && nvm install ${NODE_VERSION} \
+  && nvm alias default ${NODE_VERSION} \
+  && nvm use default \
+  && npm install -g yarn
+
+ENV NODE_PATH $NVM_DIR/v$NODE_VERSION/lib/node_modules
+ENV PATH $NVM_DIR/versions/node/v$NODE_VERSION/bin:$PATH
 
 # Phoenix
 RUN mix local.hex --force
