@@ -53,7 +53,7 @@ If you are using a recent version of [Visual Studio Code](https://code.visualstu
 5. Create your new Phoenix application with the following command (**note the `.`**!):
 
    ```bash
-   mix phx.new . hello_world
+   mix phx.new . --app hello_world
    ```
 
 6. As the mix command runs, you will see your Visual Studio Code file explorer populate with the files of your new phoenix app. All these files are available outside your development environment in the `./app` folder.
