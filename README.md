@@ -41,7 +41,7 @@ If you are using a recent version of [Visual Studio Code](https://code.visualstu
 1. Use [Degit](https://github.com/Rich-Harris/degit) to quickly clone this project as a scaffold for your new project, for example an app called `hello_world`.
 
    ```css
-   npx degit nicbet/docker-phoenix#1.7.10 hello_world
+   npx degit nicbet/docker-phoenix#1.7.111 hello_world
    ```
 
 2. Open the `hello_world` folder in Visual Studio Code

@@ -1,7 +1,7 @@
-FROM elixir:1.15.7
+FROM elixir:1.16.1
 
 # Build Args
-ARG PHOENIX_VERSION=1.7.10
+ARG PHOENIX_VERSION=1.7.11
 ARG NODE_VERSION=20.10.0
 
 # Dependencies
