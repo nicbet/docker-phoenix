@@ -1,4 +1,4 @@
-FROM elixir:1.16.2
+FROM elixir:1.16.1
 
 # Build Args
 ARG PHOENIX_VERSION=1.7.12
@@ -6,7 +6,7 @@ ARG NODE_VERSION=20.10.0
 
 # Dependencies
 RUN apt update \
-  && apt upgrade \
+  && apt upgrade -y \
   && apt install -y bash curl git build-essential inotify-tools
 
 # NodeJS
