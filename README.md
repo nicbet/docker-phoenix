@@ -119,7 +119,7 @@ make docker-image
 
 ## Usage with an existing project
 
-You can use this project to dockerize the development enviroment for an existing project. Follow the steps above, but instead of initializing a new application with `mix phx.new`, copy your existing project code to the `./app` subdirectory. This will make your existing code available in the dockerized dev environment.
+You can use this project to dockerize the development environment for an existing project. Follow the steps above, but instead of initializing a new application with `mix phx.new`, copy your existing project code to the `./app` subdirectory. This will make your existing code available in the dockerized dev environment.
 
 ## Contributing
 
